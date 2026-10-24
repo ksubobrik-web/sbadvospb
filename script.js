@@ -1,0 +1,28 @@
+const toggle=document.querySelector('.menu-toggle');const nav=document.querySelector('.nav');function closeMenu(){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Открыть меню')}toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';nav.classList.toggle('open',!open);toggle.setAttribute('aria-expanded',String(!open));toggle.setAttribute('aria-label',open?'Открыть меню':'Закрыть меню')});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+// Click or keyboard activates flip; click again restores front.
+document.querySelectorAll('.service-flip').forEach(card=>{
+ const control=card.querySelector('.flip-control');
+ control.addEventListener('click',()=>{
+   const flipped=card.classList.toggle('is-flipped');
+   control.setAttribute('aria-pressed',String(flipped));
+   control.setAttribute('aria-label',(flipped?'Вернуться: ':'Подробнее: ')+card.getAttribute('aria-label'));
+ });
+});
+
+
+// Accessible three-photo gallery; controls never navigate away.
+(()=>{const slides=[...document.querySelectorAll('.about-slide')];if(!slides.length)return;let current=0;function show(index){current=(index+slides.length)%slides.length;slides.forEach((slide,i)=>{slide.classList.toggle('is-active',i===current);slide.setAttribute('aria-hidden',String(i!==current));});}document.querySelectorAll('[data-gallery]').forEach(btn=>btn.addEventListener('click',()=>show(current+(btn.dataset.gallery==='next'?1:-1))));show(0);})();
+
+// Three reviews by default, with an accessible reveal/collapse button.
+(()=>{const btn=document.querySelector('.reviews-toggle');if(!btn)return;const rest=[...document.querySelectorAll('#reviews .review-card')].slice(3);btn.addEventListener('click',()=>{const open=btn.getAttribute('aria-expanded')==='true';rest.forEach(card=>{card.hidden=open});btn.setAttribute('aria-expanded',String(!open));btn.textContent=open?'Показать все отзывы':'Свернуть отзывы';if(open){document.querySelector('#reviews-heading').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'})}})})();
+
+// Light theme is the default; visitors can explicitly switch and retain their choice.
+(()=>{const btn=document.querySelector('.theme-toggle');function sync(){const dark=document.documentElement.dataset.theme==='dark';btn.textContent=dark?'☀':'☾';btn.setAttribute('aria-label',dark?'Включить светлую тему':'Включить тёмную тему');document.querySelector('meta[name="theme-color"]').content=dark?'#091827':'#102234'}btn.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('notalex-theme',next)}catch(e){}sync()});sync()})();
+// Accessible modal viewer for original photographs and document files.
+(()=>{const modal=document.querySelector('.image-lightbox'),img=modal.querySelector('img');const sources=[...document.querySelectorAll('.about-slide,.document-tile img')];let index=0,returnFocus=null,startX=null;function show(i){index=(i+sources.length)%sources.length;const source=sources[index];img.src=source.closest('a')?.href||source.src;img.alt=source.alt;}function open(i){returnFocus=document.activeElement;show(i);modal.hidden=false;document.body.classList.add('lightbox-open');modal.querySelector('.lightbox-close').focus()}function close(){modal.hidden=true;document.body.classList.remove('lightbox-open');img.removeAttribute('src');returnFocus?.focus()}sources.forEach((source,i)=>{const parent=source.closest('a');if(parent){parent.addEventListener('click',e=>{e.preventDefault();open(i)})}});
+const portraitFrame=document.querySelector('.about-visual-frame');
+function openCurrentPortrait(){open(sources.indexOf(document.querySelector('.about-slide.is-active')))}
+portraitFrame.addEventListener('click',openCurrentPortrait);
+portraitFrame.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openCurrentPortrait()}});modal.querySelector('.lightbox-close').addEventListener('click',close);modal.querySelector('.lightbox-prev').addEventListener('click',()=>show(index-1));modal.querySelector('.lightbox-next').addEventListener('click',()=>show(index+1));modal.addEventListener('click',e=>{if(e.target===modal)close()});document.addEventListener('keydown',e=>{if(modal.hidden)return;if(e.key==='Escape'){e.preventDefault();close()}if(e.key==='ArrowLeft')show(index-1);if(e.key==='ArrowRight')show(index+1);if(e.key==='Tab'){const controls=[...modal.querySelectorAll('button')];const n=controls.indexOf(document.activeElement);if(e.shiftKey&&n===0){e.preventDefault();controls.at(-1).focus()}else if(!e.shiftKey&&n===controls.length-1){e.preventDefault();controls[0].focus()}}});modal.addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX},{passive:true});modal.addEventListener('touchend',e=>{if(startX===null)return;const d=e.changedTouches[0].clientX-startX;if(Math.abs(d)>45)show(index+(d<0?1:-1));startX=null},{passive:true});const frame=document.querySelector('.about-visual-frame');let sx;frame.addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX},{passive:true});frame.addEventListener('touchend',e=>{if(sx==null)return;const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>45){document.querySelector('[data-gallery="'+(d<0?'next':'prev')+'"]').click();sx=null}},{passive:true})})();
+// Maintain expanded state for assistive technology.
+document.querySelectorAll('.flip-control').forEach(b=>b.addEventListener('click',()=>b.setAttribute('aria-expanded',b.getAttribute('aria-pressed'))));

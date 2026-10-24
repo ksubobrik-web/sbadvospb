@@ -1,0 +1,127 @@
+/* Первый экран: независим от навигации. */
+.hero.hero-reference,html[data-theme="dark"] .hero.hero-reference{position:relative!important;overflow:hidden!important;isolation:isolate;background-color:#061827!important;background-image:linear-gradient(90deg,rgba(2,17,30,.34) 0%,rgba(2,17,30,.22) 30%,rgba(2,17,30,0) 65%),url("assets/hero-reference-new.webp")!important;background-size:cover!important;background-position:center center!important;background-repeat:no-repeat!important;border:0!important;color:#f8eee2!important;}
+.hero-reference:before,.hero-reference:after,.hero-reference .hero-copy:before,.hero-reference .hero-copy:after {display:none!important;content:none!important;}
+.hero-reference .hero-grid{width:min(1370px,calc(100% - 9vw))!important;margin:0 auto!important;display:block!important;min-height:clamp(680px,57.5vw,850px)!important;position:relative!important;z-index:1!important;padding:clamp(56px,5.5vw,86px) 0 92px!important;}
+.hero-reference .hero-copy{position:relative!important;z-index:1!important;padding:0!important;max-width:min(48%,590px)!important;min-height:auto!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;}
+.hero-reference .eyebrow{font-size:.82rem!important;letter-spacing:.25em!important;color:#e1bc82!important;margin:0 0 19px!important;}
+.hero-reference h1{font-family:Prata,Georgia,serif!important;font-weight:400!important;color:#f5dfb9!important;letter-spacing:-.055em!important;font-size:clamp(4.2rem,7.5vw,7.3rem)!important;line-height:1.12!important;white-space:nowrap!important;overflow-wrap:normal!important;margin:0 0 24px!important;text-shadow:0 2px 16px rgba(0,0,0,.13)!important;}
+.hero-reference h2{font-family:Prata,Georgia,serif!important;color:#fff6ec!important;font-weight:400!important;letter-spacing:-.035em!important;font-size:clamp(1.7rem,2.38vw,2.45rem)!important;line-height:1.3!important;max-width:580px!important;margin:0 0 18px!important;text-shadow:0 2px 12px rgba(0,0,0,.16)!important;}
+.hero-reference .hero-lead{font-family:Manrope,Arial,sans-serif!important;color:#e5e8eb!important;font-size:clamp(.97rem,1.12vw,1.15rem)!important;line-height:1.7!important;max-width:425px!important;margin:0 0 23px!important;}
+.hero-reference .hero-reference-experience{color:#e2c28f!important;font-size:.85rem!important;letter-spacing:.03em!important;margin:0 0 23px!important;}
+.hero-reference .button-gold {font-size:.95rem!important;font-weight:600!important;background:#e4be83!important;color:#172a3b!important;border:0!important;min-width:300px!important;min-height:61px!important;padding:16px 27px!important;box-shadow:none!important;}
+.hero-reference-location{margin-top:29px!important;font-size:.91rem!important;color:#f0eee9!important;text-shadow:0 2px 8px rgba(0,0,0,.3);}
+@media(max-width:1180px){.hero-reference .hero-grid{min-height:720px!important;}.hero-reference .hero-copy{max-width:51%!important;}.hero-reference h1{font-size:clamp(3.6rem,7.1vw,6.2rem)!important}.hero-reference h2{font-size:clamp(1.5rem,2.3vw,2.1rem)!important;}}
+/* Mobile visual is a normal, separate element; never placed behind text. */
+.hero-reference .hero-mobile-visual {display:none;}
+@media(max-width:780px){
+  .header .brand-icon{width:39px!important;height:42px!important}
+  .header .brand-icon img{width:38px!important;height:38px!important}
+  .hero.hero-reference,
+  html[data-theme="dark"] .hero.hero-reference{
+    display:flex!important;
+    flex-direction:column!important;
+    background:#061827!important;
+    background-image:none!important;
+    min-height:0!important;
+    border:0!important;
+  }
+  .hero-reference .hero-mobile-visual{
+    display:block!important;
+    width:100%;
+    height:clamp(275px,79vw,455px);
+    overflow:hidden;
+    flex-shrink:0;
+    background-color:#061827;
+  }
+  .hero-reference .hero-mobile-visual img{
+    display:block;
+    width:100%;
+    height:100%;
+    max-width:none;
+    object-fit:cover;
+    object-position:67% 51%;
+    filter:none;
+  }
+  .hero-reference .hero-grid{
+    display:block!important;
+    width:calc(100% - 48px)!important;
+    min-height:0!important;
+    margin:0 auto!important;
+    padding:34px 0 54px!important;
+  }
+  .hero-reference .hero-copy{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    position:relative!important;
+    max-width:100%!important;
+    min-height:0!important;
+    padding:0!important;
+    margin:0!important;
+  }
+  .hero-reference .eyebrow{
+    margin:0 0 10px!important;
+    font-size:.74rem!important;
+    line-height:1.5!important;
+    letter-spacing:.2em!important;
+  }
+  .hero-reference h1{
+    font-size:clamp(2.85rem,10.2vw,4.4rem)!important;
+    line-height:1.15!important;
+    letter-spacing:-.045em!important;
+    margin:0 0 17px!important;
+    white-space:nowrap!important;
+  }
+  .hero-reference h2{
+    font-size:clamp(1.27rem,3.7vw,1.85rem)!important;
+    line-height:1.42!important;
+    letter-spacing:-.025em!important;
+    max-width:24ch!important;
+    margin:0 0 16px!important;
+  }
+  .hero-reference .hero-lead{
+    font-size:clamp(.93rem,2.35vw,1rem)!important;
+    line-height:1.65!important;
+    max-width:43ch!important;
+    margin:0 0 17px!important;
+  }
+  .hero-reference .hero-reference-experience{
+    margin:0 0 22px!important;
+    font-size:.85rem!important;
+    line-height:1.5!important;
+  }
+  .hero-reference .button-gold{
+    display:inline-flex!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:58px!important;
+    justify-content:space-between!important;
+    align-items:center!important;
+    padding:15px 20px!important;
+    margin:0!important;
+    font-size:.94rem!important;
+  }
+  .hero-reference-location{
+    margin-top:24px!important;
+    color:#dce2e5!important;
+    font-size:.87rem!important;
+    line-height:1.5!important;
+  }
+}
+@media(max-width:430px){
+  .hero-reference .hero-mobile-visual{height:clamp(270px,79vw,350px)}
+  .hero-reference .hero-grid{width:calc(100% - 40px)!important;padding:30px 0 48px!important}
+  .hero-reference h1{font-size:clamp(2.75rem,10.8vw,3.45rem)!important}
+  .hero-reference h2{font-size:1.29rem!important;max-width:100%!important}
+}
+@media(max-width:350px){
+  .hero-reference .hero-mobile-visual img{object-position:69% 50%}
+  .hero-reference .hero-grid{width:calc(100% - 32px)!important}
+  .hero-reference h1{font-size:clamp(2.55rem,11vw,3rem)!important}
+  .hero-reference h2{font-size:1.2rem!important}
+}
+
+/* Clean actions: no decorative outlines/shadows, retain keyboard focus accessibility. */
+.header .button-header,.hero-reference .button-gold {border:0!important;border-radius:0!important;box-shadow:none!important;text-decoration:none!important;}
+.header .button-header:hover,.hero-reference .button-gold:hover {transform:none!important;box-shadow:none!important;}
+.header .button-header:focus-visible,.hero-reference .button-gold:focus-visible {outline:2px solid #f3dcaa!important;outline-offset:3px!important;}
